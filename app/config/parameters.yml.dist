@@ -2,9 +2,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     localhost
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_name:     **ChangeMe**
+    database_user:     **ChangeMe**
+    database_password: **ChangeMe**
 
     mailer_transport:  smtp
     mailer_host:       localhost
@@ -12,6 +12,6 @@ parameters:
     mailer_password:   ~
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            **ChangeMe**
 
     erm.model_file:    /app/model/entities.erm

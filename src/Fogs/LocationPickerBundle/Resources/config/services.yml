@@ -1,0 +1,5 @@
+services:
+    fogs_locationpicker.form.locationpicker:
+        class: Fogs\LocationPickerBundle\Form\LocationPickerType
+        tags:
+            - { name: form.type, alias: locationpicker }

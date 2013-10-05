@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}User - index{% endblock %}
+
+
+
+{% block body -%}
+    <h1>User list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Enabled</th>
+                <th>Last Login</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.username }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.enabled }}</td>
+                <td>{{ entity.lastLogin is empty ? "-" : entity.lastLogin |date('Y-m-d H:m:s') }}</td>
+                <td>{{ entity.roles | join(', ') }}</td>
+                <td>
+                <ul class="btn-group">
+                    <li>
+				        <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
+				            <input type="hidden" name="_method" value="DELETE" />
+				            {{ form_widget(delete_forms[entity.id]) }}
+				            <button class="btn btn-small" type="submit">Delete</button>
+				        </form>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

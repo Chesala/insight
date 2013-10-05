@@ -1,0 +1,10 @@
+welcome:    Welcome to INSIGHT
+register:
+    teaser:       Before you can start using INSIGHT, you need to register first.
+    action:       Register
+login:
+    teaser:       Already registered? Go ahead and tell us who you are.
+    username:     User
+    password:     Password
+    submit:       Login
+    

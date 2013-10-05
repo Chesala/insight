@@ -1,0 +1,9 @@
+# Assetic Configuration
+assetic:
+    assets:
+        locationpicker_js:
+            inputs: 
+              - "%kernel.root_dir%/../vendor/ubilabs/geocomplete/jquery.geocomplete.js"
+              - "%kernel.root_dir%/../src/Fogs/LocationPickerBundle/Resources/public/js/locationpicker.js"
+            output: js/locationpicker.js
+            

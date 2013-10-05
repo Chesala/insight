@@ -1,0 +1,57 @@
+{% block locationpicker_widget %}
+
+	{% set orig_name = full_name %}
+	{% set orig_value = value %}
+    {% set value = null %}
+    {% set full_name = js_name %}
+	{% set classes = attr['class'] is defined ? attr['class'] ~ ' ' ~ 'geocomplete' : 'geocomplete' %}
+	{% set attr = attr|merge({ 'class': classes}) %} 
+    {{ block('form_widget_simple') }}
+        
+	{% if not hide_map %}
+    <div id="{{ js_name ~ '_map' }}" class="map_canvas" style="width: 400px; height: 200px;"></div>
+	{% endif %}
+
+	<div id="{{ js_name ~ '_data' }}">
+	{% set attr = attr|merge({ 'class': ''}) %} 
+	{% set type = 'hidden' %}
+    {% set attr = {'data-geo': 'lat'}  %}
+    {% set value = orig_value.latitude %}
+	{% set full_name = orig_name ~ '[latitude]' %}
+    {% set id = js_name ~ '_latitude' %}
+    {{ block('form_widget_simple') }}
+    
+    {% set attr = {'data-geo': 'lng'}  %}
+    {% set value = orig_value.longitude %}
+	{% set full_name = orig_name ~ '[longitude]' %}
+    {% set id = js_name ~ '_longitude' %}
+    {{ block('form_widget_simple') }}
+    
+    {% set attr = {'data-geo': 'formatted_address'}  %}
+    {% set value = null %}
+	{% set full_name = orig_name ~ '[formatted_address]' %}
+    {% set id = js_name ~ '_address' %}
+	{{ block('form_widget_simple') }}
+	</div>
+
+    <script>
+		if (typeof geocompleteOptions=='undefined') var geocompleteOptions = {};
+    	geocompleteOptions['{{ js_name }}'] = {
+    		{% if not orig_value.latitude is empty and not orig_value.longitude is empty %}
+    		location: [{{ orig_value.latitude }}, {{ orig_value.longitude }}],
+    		{% endif %}			  
+    		{% if not hide_map %}
+    		map: "#{{ js_name ~ '_map' }}",
+    		mapOptions: {
+    			zoom: {{ map_zoom }}
+    		},
+    		markerOptions: {
+    			draggable: {{ marker_drabbable }}
+    		},
+    		{% endif %}
+			details: "#{{ js_name ~ '_data' }}",
+			detailsAttribute: "data-geo"
+        };
+	</script>
+
+{% endblock locationpicker_widget %}

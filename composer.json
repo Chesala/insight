@@ -10,20 +10,34 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.1.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "doctrine/doctrine-bundle": "1.0.*",
-        "twig/extensions": "1.0.*@dev",
+        "symfony/symfony": "2.2.*",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.1.*",
-        "symfony/swiftmailer-bundle": "2.1.*",
-        "symfony/monolog-bundle": "2.1.*",
-        "sensio/distribution-bundle": "2.1.*",
-        "sensio/framework-extra-bundle": "2.1.*",
-        "sensio/generator-bundle": "2.1.*",
-        "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*",
+        "symfony/swiftmailer-bundle": "2.2.*",
+        "symfony/monolog-bundle": "2.2.*",
+        "sensio/distribution-bundle": "2.2.*",
+        "sensio/framework-extra-bundle": "2.2.*",
+        "sensio/generator-bundle": "2.2.*",
+        "jms/security-extra-bundle": "1.4.*",
+        "jms/di-extra-bundle": "1.3.*",
+        "creof/doctrine2-spatial": "dev-master",
+        "beberlei/DoctrineExtensions": "*",
+        "fogs/tagging-bundle": "dev-master",
         "kriswallsmith/assetic": "1.1.*@dev",
-        "softwarebetrieb/tools": "*"
+        "softwarebetrieb/tools": "*",
+        "softwarebetrieb/library": "*",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/message-bundle": "dev-master",
+        "braincrafted/bootstrap-bundle": "dev-master",
+        "twitter/bootstrap": "2.3.*",
+        "leafo/lessphp": "0.4.0",
+        "twbs/bootstrap": "2.3.*",
+        "jquery/jquery": "1.9.*",
+        "bmatzner/jquery-ui-bundle": "dev-master",
+        "ubilabs/geocomplete": "master",
+		"fpn/tag-bundle":"dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -42,7 +56,9 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "web/bundles/",
+        "component-baseurl": "/assets"
     },
     "minimum-stability": "dev",
     "extra": {
@@ -50,6 +66,51 @@
         "symfony-web-dir": "web"
     },
     "repositories": [
-        { "type": "git", "url": "ssh://prz1utl01/var/git/tools" }
-    ]
+        { 
+	       	"type": "git", 
+        	"url": "http://projects.softwarebetrieb.de/git/library" 
+        },
+        { 
+        	"type": "git", 
+        	"url": "http://projects.softwarebetrieb.de/git/tools" 
+        },
+		{
+			"type": "package",
+			"package": {
+				"name": "jquery/jquery",
+				"version": "1.9.1",
+				"dist": {
+					"url": "http://code.jquery.com/jquery-1.9.1.js",
+					"type": "file"
+				}
+			}
+		},
+		{
+            "type": "package",
+            "package": {
+                "name": "ubilabs/geocomplete",
+                "type": "component",
+                "version": "master",
+                "dist": {
+                    "url": "https://github.com/ubilabs/geocomplete/archive/master.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/ubilabs/geocomplete.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "extra": {
+                    "component": {
+                        "scripts": [
+                            "jquery.geocomplete.js"
+                        ]
+                    }
+                },
+                "require": {
+                    "robloach/component-installer": "*"
+                }
+            }
+        }
+	]    
 }

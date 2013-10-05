@@ -1,0 +1,31 @@
+services:
+    fogs_insight.user_registered:
+        class: Fogs\InsightBundle\EventListener\UserRegisteredListener
+        arguments: 
+            entityManager: "@doctrine.orm.entity_manager"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    serializer.method:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+    serializer.encoder.json:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+    serializer:
+        class: Symfony\Component\Serializer\Serializer
+        arguments:
+            - ["@serializer.method"]
+            - {json: "@serializer.encoder.json" }
+
+    # form types
+    form.type.offer:
+        class: Fogs\InsightBundle\Form\OfferType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: offer_type }
+
+    form.type.inquiry:
+        class: Fogs\InsightBundle\Form\InquiryType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: inquiry_type }
+            

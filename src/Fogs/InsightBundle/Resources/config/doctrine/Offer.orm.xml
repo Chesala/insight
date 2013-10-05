@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+  <entity name="Fogs\InsightBundle\Entity\Offer" table="Insight__Offer" repository-class="Fogs\InsightBundle\Repository\OfferRepository">
+    <lifecycle-callbacks/>
+    <id name="id" column="id" type="bigint">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="title" column="title" type="string" length="256" nullable="true" unique="false"/>
+    <field name="description" column="description" type="text" nullable="true" unique="false"/>
+    <field name="validFrom" column="validFrom" type="date" nullable="true" unique="false"/>
+    <field name="validUntil" column="validUntil" type="date" nullable="true" unique="false"/>
+    <field name="location" column="location" type="Point" nullable="false" unique="false"/>
+    <many-to-one target-entity="Fogs\UserBundle\Entity\User" field="host" inversed-by="offers">
+      <cascade>
+        <cascade-persist/>
+      </cascade>
+      <join-column referenced-column-name="id" name="host_id" nullable="false"/>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

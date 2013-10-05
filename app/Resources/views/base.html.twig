@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
+
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
+		{% block stylesheets %}
+		  {% stylesheets '../app/Resources/public/css/*' %}
+		    <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+		  {% endstylesheets %}
+        {% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/tagging.css') }}" />
     </head>
+
     <body>
         {% include "::navigation.html.twig" %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% include "::flashmessages.html.twig" %}
+        
+  		<div class="container">
+        	<div class="clearfix">
+        	{% block body %}{% endblock %}
+			</div>
+			
+			<hr />
+			
+			<footer>
+				<p>&copy; John & Olli {{ "now"|date("Y") }}</p>
+			</footer>
+		</div>
+		
+    	
+    	<script src="//maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+		<script src="{{ asset('js/jquery.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.js') }}"></script>
+		<script src="{{ asset('js/typeahead.min.js') }}"></script>
+		<script src="{{ asset('js/tagging.js') }}"></script>
+		<script src="{{ asset('js/locationpicker.js') }}"></script>
+
+	    {% block javascripts %}{% endblock %}
+    	
+		<script>
+		    $(document).ready(function () {
+		        {% block documentReady %}{% endblock documentReady %}
+		    });
+		</script>
+		
     </body>
+
 </html>

@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'profile.index'|trans }}{% endblock %}
+
+
+
+{% block body -%}
+    <h1>{{ 'profile.index'|trans }}</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Dateofbirth</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td><a href="{{ path('profile_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{% if entity.dateOfBirth %}{{ entity.dateOfBirth|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.description }}</td>
+                <td>
+                <ul class="btn-group">
+                    <li>
+                        <a class="btn btn-small" href="{{ path('profile_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-small" href="{{ path('profile_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

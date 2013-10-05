@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}INSIGHT{% endblock %}
+
+{% block body %}
+
+      <div class="hero-unit">
+   			<h1>{{ 'welcome'|trans }}</h1>
+			<p>{{ 'register.teaser'|trans }}</p>
+			<p>
+			<a class="btn" href="{{ path('fos_user_registration_register') }}">{{ 'register.action'|trans }}</a>
+			</p>
+			{{ 'login.teaser'|trans }}
+			<p>
+			{% include "::login.html.twig" %}
+			</p>
+      </div>
+      
+      <div class="row">
+        <div class="span4">
+          <h2>{{ 'introduction.what.headline'|trans }}</h2>
+          <p>{{ 'introduction.what.text'|trans }}</p>
+          <p><a class="btn" href="http://www.mensa.org/">{{ 'introduction.what.link'|trans }} &raquo;</a></p>
+        </div>
+       
+        <div class="span4">
+          <h2>{{ 'introduction.why.headline'|trans }}</h2>
+          <p>{{ 'introduction.why.text'|trans }}</p>
+          <p><a class="btn" href="{{ path('about') }}">{{ 'introduction.why.link'|trans }} &raquo;</a></p>
+        </div>
+        
+        <div class="span4">
+          <h2>{{ 'introduction.who.headline'|trans }}</h2>
+          <p>{{ 'introduction.who.text'|trans }}</p>
+          <p><a class="btn" href="{{ path('legal') }}">{{ 'introduction.who.link'|trans }} &raquo;</a></p>
+        </div>
+      </div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'profile.show'|trans }}{% endblock %}
+
+{% block body -%}
+    <h1>{{ 'profile.show'|trans }}</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Dateofbirth</th>
+                <td>{{ entity.dateOfBirth != null ? entity.dateOfBirth|date('d.m.Y') : '-' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>
+					<ul>
+					{% for key, value in entity.tags %}
+					  <li>{{ value }}</li>
+					{% endfor %} 
+					</ul>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions btn-group">
+{% if is_granted('ROLE_ADMIN') %}
+    <li>
+        <a class="btn" href="{{ path('profile') }}">
+            {{ 'abort'|trans }}
+        </a>
+    </li>
+{% endif %}
+    <li>
+        <a class="btn" href="{{ path('profile_edit', { 'id': id }) }}">
+            {{ 'edit'|trans }}
+        </a>
+    </li>
+</ul>
+{% endblock %}

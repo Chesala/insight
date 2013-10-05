@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Offer - show{% endblock %}
+
+
+
+{% block body -%}
+    <h1>Offer</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Validfrom</th>
+                <td>{{ entity.validFrom is empty ? "-" : entity.validFrom|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Validuntil</th>
+                <td>{{ entity.validUntil is empty ? "-" : entity.validUntil |date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ entity.location }}</td>
+            </tr>
+            <tr>
+                <th>Host</th>
+                <td>{{ entity.host }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions btn-group">
+    <li>
+        <a class="btn" href="{{ path('offer') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a class="btn" href="{{ path('offer_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('offer_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button class="btn" type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+fogs_user:
+    resource: "@FogsUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fogs_insight:
+    resource: "@FogsInsightBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

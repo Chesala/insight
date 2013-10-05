@@ -1,0 +1,42 @@
+welcome:          Willkommen bei INSIGHT
+
+edit:             bearbeiten
+save:             speichern
+abort:            abbrechen
+
+introduction:
+    what:         
+        headline: Was ist das?
+        text:     INSIGHT ist der Projektname für diese Web-Anwendung, mit deren Hilfe Mitglieder von Mensa sich über das Internet für SIGHT-Aktivitäten überall auf der Welt verabreden können.
+        link:     Mehr über Mensa    
+    why:         
+        headline: Warum all das?
+        text:     Reisen macht Spaß. Neue Leute kennenlernen ist großartig. Frühzeitiges und langwieriges planen dagegen nicht. Wir möchten, dass sich Mensa-Mitglieder auch unterwegs einfach kennenlernen können.
+        link:     Mehr über INSIGHT    
+    who:         
+        headline: Wer betreibt das?
+        text:     Wir sind zwei Mitglieder, die die Idee hierzu auf einer Mensa-Veranstaltung hatten. INSIGHT ist kein offizielles Projekt von Mensa. Aber wir arbeiten auch daran.
+        link:     Mehr über uns
+
+about:
+    headline:     Über uns
+    text:         John und Olli wollten doch nur ein bischen reisen und Leute kennenlernen..
+
+legal:
+    headline:     Rechtliches
+    text:         Diese Webseite wird betreiben von John und Olli
+
+register:
+    teaser:       Um INSIGHT nutzen zu können, musst Du Dich zunächst registrieren    
+    action:       Registrieren
+login:
+    teaser:       Wenn wir Dich schon kennen, sag uns, wer Du bist.
+    username:     Benutzername
+    password:     Passwort
+    submit:       Anmelden
+
+profile:
+    index:        Profile
+    edit:         Profil bearbeiten
+    show:         Profil anzeigen
+    

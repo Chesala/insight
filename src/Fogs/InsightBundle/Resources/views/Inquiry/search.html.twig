@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Inquiries{% endblock %}
+
+{% block body -%}
+    <h1>Inquiries</h1>
+
+    <div id="search_results" style="width:100%; height:400px"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Valid from</th>
+                <th>Valid until</th>
+                <th>Distance</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+                <tr>
+                <td><a href="{{ path('inquiry_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.description }}</td>
+                <td>{% if entity.validFrom %}{{ entity.validFrom|date('d.M.y') }}{% endif %}</td>
+                <td>{% if entity.validUntil %}{{ entity.validUntil|date('d.M.y') }}{% endif %}</td>
+                <td>{{ '%.1f'|format(entity.distance) }} km</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+    {% javascripts '@FogsInsightBundle/Resources/public/jquery-ui-map/ui/jquery.ui.map.js' %}
+	    <script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+
+{% block documentReady %}
+{{ parent() }}
+
+var map = new google.maps.Map(document.getElementById("search_results"));
+var results = {{ entities | json_encode() | raw }} 
+
+$('#search_results').gmap().bind('init', function() { 
+	$.each(results, function(i, marker) {
+		$('#search_results').gmap('addMarker', { 
+			'position': new google.maps.LatLng(marker.location.latitude, marker.location.longitude), 
+			'bounds': true 
+		}).click(function() {
+			$('#search_results').gmap('openInfoWindow', { 'content': marker.title }, this);
+		});
+	});
+});
+
+{% endblock %}

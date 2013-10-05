@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Offers{% endblock %}
+
+
+
+{% block body -%}
+    <h1>Offers</h1>
+
+    {% if entities is empty %}
+
+    <p>Du hast noch keine eigenen Angebote angelegt.</p>
+    
+    {% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Validfrom</th>
+                <th>Validuntil</th>
+                <th>Location</th>
+                {% if is_granted('ROLE_ADMIN') %}<th>Host</th>{% endif %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('offer_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.description }}</td>
+                <td>{% if entity.validFrom %}{{ entity.validFrom|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.validUntil %}{{ entity.validUntil|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.location }}</td>
+                {% if is_granted('ROLE_ADMIN') %}<td>{{ entity.host.username }}</td>{% endif %}
+                <td>
+                <ul class="btn-group">
+                    <li>
+                        <a class="btn btn-small" href="{{ path('offer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-small" href="{{ path('offer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+    
+    <ul class="btn-group">
+        <li>
+            <a class="btn" href="{{ path('offer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+        
+    {% endblock %}

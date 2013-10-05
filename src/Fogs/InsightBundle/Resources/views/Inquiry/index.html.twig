@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Inquiry - index{% endblock %}
+
+
+{% block body -%}
+    <h1>Inquiry list</h1>
+
+    {% if entities is empty %}
+
+    <p>Du hast noch keine eigenen Angebote angelegt.</p>
+    
+    {% else %}
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Traveller</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('inquiry_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.location }}</td>
+                <td>{{ entity.traveller }}</td>
+                <td>
+                <ul class="btn-group">
+                    <li>
+                        <a class="btn btn-small" href="{{ path('inquiry_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-small" href="{{ path('inquiry_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+    
+        <ul class="btn-group">
+        <li>
+            <a class="btn" href="{{ path('inquiry_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    
+    {% endblock %}

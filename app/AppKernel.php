@@ -1,5 +1,11 @@
 <?php
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+
+use Symfony\Component\HttpKernel\HttpKernel;
+
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -19,7 +25,17 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+        	new FOS\UserBundle\FOSUserBundle(),
+        	new FOS\MessageBundle\FOSMessageBundle(),
             new Softwarebetrieb\ToolsBundle\SoftwarebetriebToolsBundle(),
+        	new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
+        	new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
+            new Fogs\MessageBundle\FogsMessageBundle(),
+            new Fogs\InsightBundle\FogsInsightBundle(),
+        	new Fogs\UserBundle\FogsUserBundle(),
+            new FPN\TagBundle\FPNTagBundle(),
+            new Fogs\TaggingBundle\FogsTaggingBundle(),
+        	new Fogs\LocationPickerBundle\FogsLocationPickerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -63,5 +79,11 @@ class AppKernel extends Kernel
     {
     	umask(0007);
     	parent::init();
+    }
+    
+    public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)
+    {
+    	Request::enableHttpMethodParameterOverride();
+    	return parent::handle($request, $type, $catch);
     }
 }

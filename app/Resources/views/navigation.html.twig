@@ -1,0 +1,41 @@
+<div class="navbar">
+    <div class="navbar-inner">
+    <a class="brand" href="{{ path('home') }}">INSIGHT</a>
+
+	{% if app.user %}
+	<ul class="nav">
+	  <li><a href="{{ path('inquiry') }}">Inquiry</a></li>
+	  <li><a href="{{ path('offer') }}">Offer</a></li>
+	  <li><a href="{{ path('profile_show', {'id': 'me'}) }}">Profile</a></li>
+	  <li><a href="{{ path('home') }}messages/">Messages</a></li>
+	{% if is_granted('ROLE_ADMIN') %}
+	
+	 <li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<li><a href="{{ path('profile') }}">Profiles</a></li>
+			<li><a href="{{ path('user') }}">Users</a></li>
+		</ul>
+	</li>
+
+	{% endif %}
+	</ul>
+	<ul class="nav pull-right">
+	  <li><a href="{{ path('fos_user_change_password') }}">Passwort ändern</a></li>
+	  <li><a href="{{ path('fos_user_security_logout') }}">Logout <b>{{ app.user.username }}</b></a></li>
+	</ul>
+	{% else %}
+	<ul class="nav">
+	  <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+	  <li><a href="{{ path('fos_user_registration_register') }}">Registrieren</a></li>
+	  <li><a href="{{ path('fos_user_resetting_request') }}">Passwort vergessen</a></li>
+	</ul>
+	<ul class="nav pull-right">
+	  <li><a href="{{ path('about') }}">{{ 'about.headline'|trans }}</a></li>
+	  <li><a href="{{ path('legal') }}">{{ 'legal.headline'|trans }}</a></li>
+	</ul>
+	{% endif %}
+
+	</div>
+</div>
+    
