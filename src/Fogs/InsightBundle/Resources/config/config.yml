@@ -1,0 +1,9 @@
+# Assetic Configuration
+assetic:
+    assets:
+        insight_js:
+            inputs: 
+              - "%kernel.root_dir%/../vendor/johansalllarsson/query-ui-map/ui/jquery.ui.map.js"
+              - "%kernel.root_dir%/../src/Fogs/InsightBundle/Resources/public/js/map_search.js"
+            output: js/insight.js
+            

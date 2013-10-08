@@ -29,7 +29,6 @@ class AppKernel extends Kernel
         	new FOS\MessageBundle\FOSMessageBundle(),
             new Softwarebetrieb\ToolsBundle\SoftwarebetriebToolsBundle(),
         	new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
-        	new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
             new Fogs\MessageBundle\FogsMessageBundle(),
             new Fogs\InsightBundle\FogsInsightBundle(),
         	new Fogs\UserBundle\FogsUserBundle(),

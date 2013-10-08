@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Search controller.
@@ -38,17 +39,39 @@ class SearchController extends Controller
    		$form->bind($request);
    		$data = $form->getData();
 
-   		if ($form->isValid()) {
-	   		if ($data['subject'] == SearchType::SUBJECT_TYPE_OFFER) {
-	   			return $this->forward('FogsInsightBundle:Offer:search', array('_format' => $_format, 'data' => $data));
-	   		} elseif ($data['subject'] == SearchType::SUBJECT_TYPE_INQUIRY) {
-	   			return $this->forward('FogsInsightBundle:Inquiry:search', array('_format' => $_format, 'data' => $data));
-	   		} else {
-	   			throw new InvalidArgumentException('Unknown subject in search');
-	   		}
+   		$em = $this->getDoctrine()->getManager();
+   		
+   		if (!$form->isValid()) {
+   			return $this->render('FogsInsightBundle:Default:internal.html.twig', $data);
+   		}
+
+   		if ($data['subject'] == SearchType::SUBJECT_TYPE_OFFER) {
+   			$repository = $em->getRepository('FogsInsightBundle:Offer');
+   		} elseif ($data['subject'] == SearchType::SUBJECT_TYPE_INQUIRY) {
+   			$repository = $em->getRepository('FogsInsightBundle:Inquiry');
+   		} else {
+   			throw new InvalidArgumentException('Unknown subject in search');
+   		}
+		
+		$entities = $repository->findWithinRange($data['location'], $data['radius']);
+		
+		$results = array();
+		foreach ($entities as $entity) {
+			$result = $entity[0];
+			$result['distance'] = $entity['distance'];
+			$result['location'] = array(
+					'latitude'	=> $result['location']->getLatitude(),
+					'longitude'	=> $result['location']->getLongitude(),
+			);
+			$results[$result['id']] = $result;
 		}
-		 
-		return $this->render('FogsInsightBundle:Default:internal.html.twig', $data);
+		
+		if ($_format == 'json') {
+			return new JsonResponse($results);
+		} else {
+			return array('entities' => $results);
+		}
+
     }
 
     /**

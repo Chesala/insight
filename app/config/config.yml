@@ -4,6 +4,7 @@ imports:
     - { resource: security.yml }
     - { resource: ../../vendor/fogs/tagging-bundle/Fogs/TaggingBundle/Resources/config/config.yml }
     - { resource: ../../src/Fogs/LocationPickerBundle/Resources/config/config.yml }
+    - { resource: ../../src/Fogs/InsightBundle/Resources/config/config.yml }
 
 framework:
     #esi:             ~

@@ -35,9 +35,10 @@
         "leafo/lessphp": "0.4.0",
         "twbs/bootstrap": "2.3.*",
         "jquery/jquery": "1.9.*",
-        "bmatzner/jquery-ui-bundle": "dev-master",
         "ubilabs/geocomplete": "master",
-		"fpn/tag-bundle":"dev-master"
+		"fpn/tag-bundle": "dev-master",
+        "bmatzner/jquery-ui-bundle": "dev-master",
+        "johansalllarsson/query-ui-map":  "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -109,6 +110,18 @@
                 },
                 "require": {
                     "robloach/component-installer": "*"
+                }
+            }
+        },
+		{
+            "type": "package",
+            "package": {
+                "name": "johansalllarsson/query-ui-map",
+                "type": "component",
+                "version": "master",
+                "dist": {
+                    "url": "http://jquery-ui-map.googlecode.com/files/jquery-ui-map-3.0-rc.zip",
+                    "type": "zip"
                 }
             }
         }
