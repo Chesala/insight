@@ -1,0 +1,36 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.loadpath
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Symfony-specific
+bin
+vendor
+app/cache/
+app/logs/
+web/bundles
+web/js
+web/css
